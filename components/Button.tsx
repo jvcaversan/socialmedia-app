@@ -19,6 +19,7 @@ interface ButtonProps {
   onPress?: () => void;
   loading?: boolean;
   hasShadow?: boolean;
+  disabled?: boolean;
 }
 
 const shadowStyle = {
@@ -36,6 +37,7 @@ const Button = ({
   onPress = () => {},
   loading = false,
   hasShadow = true,
+  disabled = false,
 }: ButtonProps) => {
   if (loading) {
     return (
@@ -47,10 +49,23 @@ const Button = ({
 
   return (
     <Pressable
-      onPress={onPress}
-      style={[styles.button, buttonStyle, hasShadow && shadowStyle]}
+      onPress={!disabled ? onPress : undefined} // Desativa a ação do botão se disabled
+      style={[
+        styles.button,
+        buttonStyle,
+        hasShadow && shadowStyle,
+        disabled && styles.disabledButton, // Aplica o estilo desativado
+      ]}
     >
-      <Text style={[styles.text, textStyle]}>{title}</Text>
+      <Text
+        style={[
+          styles.text,
+          textStyle,
+          disabled && styles.disabledText, // Aplica o estilo desativado ao texto
+        ]}
+      >
+        {title}
+      </Text>
     </Pressable>
   );
 };
@@ -71,5 +86,12 @@ const styles = StyleSheet.create({
     fontSize: hp(2.5),
     color: "white",
     fontWeight: "700",
+  },
+  disabledButton: {
+    backgroundColor: theme.colors.primary, // Define a cor de fundo quando desativado
+    opacity: 0.5, // Define a opacidade para dar um visual de desativado
+  },
+  disabledText: {
+    color: theme.colors.text, // Define a cor do texto quando desativado
   },
 });

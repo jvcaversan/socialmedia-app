@@ -3,10 +3,12 @@ import React from "react";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import { StatusBar } from "expo-status-bar";
 import { wp, hp } from "../../helpers/common";
-import { theme } from "../../constants/theme";
+import { theme } from "../../constants/theme.js";
 import Button from "@/components/Button";
+import { router, useRouter } from "expo-router";
 
 const Welcome = () => {
+  const router = useRouter();
   return (
     <ScreenWrapper bg="white">
       <StatusBar style="dark" />
@@ -47,11 +49,11 @@ const Welcome = () => {
           <Button
             title="Começar Agora"
             buttonStyle={{ marginHorizontal: wp(3) }}
-            onPress={() => {}}
+            onPress={() => router.push("/signUp")}
           />
           <View className="flex flex-row gap-1 items-center justify-center">
             <Text className="text-center">Já possui cadastro?</Text>
-            <Pressable>
+            <Pressable onPress={() => router.push("/login")}>
               <Text className="text-center text-green-500 font-bold">
                 Efetuar Login
               </Text>
