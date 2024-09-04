@@ -88,7 +88,7 @@ const SignUp = () => {
         </View>
         <View className="flex flex-row gap-1 items-center justify-center">
           <Text className="text-center">Já possui cadastro?</Text>
-          <Pressable onPress={() => router.push("/signUp")}>
+          <Pressable onPress={() => router.push("/login")}>
             <Text className="text-center text-green-500 font-bold">
               Efetuar Login
             </Text>
