@@ -15,12 +15,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, isLoading] = useState(false);
 
-  const handleLogin = () => {
-    // Aqui você pode adicionar a lógica para fazer o login, como chamar uma API
-    console.log("Email:", email);
-    console.log("Password:", password);
-    // Após a lógica de login, lembre-se de definir isLoading como false
-  };
+  const handleLogin = async () => {};
 
   const router = useRouter();
 
@@ -59,7 +54,13 @@ const Login = () => {
         </View>
 
         <View style={{ gap: 25 }}>
-          <Text style={{ fontSize: hp(1.5), color: theme.colors.text }}>
+          <Text
+            style={{
+              fontSize: hp(1.5),
+              color: theme.colors.text,
+              marginTop: -15,
+            }}
+          >
             Faça o login para continuar
           </Text>
           <Input

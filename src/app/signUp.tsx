@@ -23,7 +23,7 @@ const SignUp = () => {
   return (
     <ScreenWrapper bg="white">
       <StatusBar style="dark" />
-      <View style={{ flex: 1, gap: 30, paddingHorizontal: wp(5) }}>
+      <View style={{ flex: 1, gap: 45, paddingHorizontal: wp(5) }}>
         <BackButton
           buttonStyle={{
             alignSelf: "flex-start",
@@ -55,7 +55,13 @@ const SignUp = () => {
         </View>
 
         <View style={{ gap: 25 }}>
-          <Text style={{ fontSize: hp(1.5), color: theme.colors.text }}>
+          <Text
+            style={{
+              fontSize: hp(1.5),
+              color: theme.colors.text,
+              marginTop: -15,
+            }}
+          >
             Preencha os campos para criar sua conta!
           </Text>
           <Input
