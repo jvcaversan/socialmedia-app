@@ -1,4 +1,4 @@
-import { Pressable, Text, View } from "react-native";
+import { Alert, Pressable, Text, View } from "react-native";
 import React, { useState } from "react";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import { StatusBar } from "expo-status-bar";
@@ -9,14 +9,29 @@ import Input from "@/components/Input";
 import { AntDesign, Octicons } from "@expo/vector-icons";
 import Button from "@/components/Button";
 import { useRouter } from "expo-router";
+import { supabase } from "@/lib/supabase";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [loading, isLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = async () => {};
+  const handleSignUp = async () => {
+    setLoading(true);
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    });
+
+    if (error) Alert.alert(error.message);
+    if (!session)
+      Alert.alert("Please check your inbox for email verification!");
+    setLoading(false);
+  };
 
   const router = useRouter();
 
@@ -87,7 +102,7 @@ const SignUp = () => {
           <Button
             title="Criar Conta"
             buttonStyle={{ marginHorizontal: wp(3) }}
-            onPress={handleLogin}
+            onPress={handleSignUp}
             loading={loading}
             disabled={!email || !password || !name}
           />
