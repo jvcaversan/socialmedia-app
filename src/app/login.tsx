@@ -14,6 +14,7 @@ import { supabase } from "@/lib/supabase";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
@@ -83,13 +84,29 @@ const Login = () => {
             onChangeText={setEmail}
             value={email}
           />
-          <Input
-            placeholder="Senha"
-            secureTextEntry
-            icon={<Octicons name="key" size={24} color={theme.colors.text} />}
-            onChangeText={setPassword}
-            value={password}
-          />
+          <View style={{ position: "relative" }}>
+            <Input
+              placeholder="Senha"
+              secureTextEntry={!showPassword} // Alterna a visibilidade
+              icon={<Octicons name="key" size={24} color={theme.colors.text} />}
+              onChangeText={setPassword}
+              value={password}
+            />
+            <Pressable
+              style={{
+                position: "absolute",
+                right: 10, // Alinha o ícone no lado direito do Input
+                top: 19, // Ajuste conforme necessário
+              }}
+              onPress={() => setShowPassword(!showPassword)} // Alterna entre mostrar e esconder a senha
+            >
+              <AntDesign
+                name={showPassword ? "eye" : "eyeo"} // Muda o ícone com base na visibilidade da senha
+                size={24}
+                color={theme.colors.text}
+              />
+            </Pressable>
+          </View>
           <Text className="text-right font-semibold text-black">
             Esqueceu a senha?
           </Text>
